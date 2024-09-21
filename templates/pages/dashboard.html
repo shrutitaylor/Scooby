@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex justify-center">
+<h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+</div>
+<div class="flex gap-x-8 justify-between" >
+    
+
+    <div class="w-full ml-16 bg-white p-8 rounded-lg shadow-lg justify-center flex flex-col">
+        <div class="p-8 border-2 border-dashed  rounded-lg">
+        <h2 class="text-xl font-semibold justify-center flex">Scooby Money</h2>
+        <img src="{{ url_for('static', filename='icons/cashIcon.png') }}" alt="Scooby Money" class="h-auto w-40 mx-auto">
+        <div class="w-full text-2xl  justify-center flex">
+            <p ><strong>${{ currentUser.TopUp }}</strong> </p>
+        </div>
+        <div class="text-center mt-5 mx-16">
+            <input type="submit" value="Top Up"
+                class="w-full check hover:check-highlight text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:check-highlight">
+        </div>
+    </div>
+    </div>
+
+    <form method="post"  class="w-full mx-16 bg-white p-8 rounded-lg shadow-lg">
+        <div class="mb-4">
+            <label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
+            <input type="datetime-local" name="start_time" id="start_time" required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
+            <input type="datetime-local" name="end_time" id="end_time" required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Top Up"
+                class="w-full check hover:check-highlight text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:check-highlight">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

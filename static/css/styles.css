@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Questrial';
+  src: url('../fonts/Questrial-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #fffef9; /*  background color */
+  font-family: 'Questrial', sans-serif; /*  default font */
+}
+
+.navbar {
+  background-color: #f6f5e3; /* Navbar color */
+}
+
+.button{
+   background-color: #fcc434; /* Button Color */
+   font-size: 18px;
+   font-weight: 600px;
+}
+
+.table-color{
+  background-color: #b0d4d0;
+}
+
+.check{
+  background-color: #78A75A;
+}
+.check-highlight{
+  background-color: #4c6a39;
+}

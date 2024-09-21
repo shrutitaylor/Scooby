@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} Scooby</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+
+</head>
+<body class=" bg-basic text-gray-900 font-ScoobyFont">
+    <!-- Global Navbar -->
+    <nav class="navbar p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center mx-10">
+          <h1 class="text-gray-900 text-2xl font-bold">
+              <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='img/ScoobyLogo.png') }}" alt="Scooby Logo" class="h-auto w-28 mr-2">
+              </a>
+          </h1>
+          <ul class="flex space-x-4">
+              {% if g.user %}
+                  <li>
+                      <span class="text-gray-800">{{ g.user['username'] }}</span>
+                  </li>
+                  <li>
+                      <a href="{{ url_for('logout') }}" class="text-gray-600 hover:text-black">Log Out</a>
+                  </li>
+              {% else %}
+                  <li>
+                      <a href="{{ url_for('register') }}" class="text-gray-600 hover:text-black">Register</a>
+                  </li>
+                  <li>
+                      <a href="{{ url_for('login') }}" class="text-gray-600 hover:text-black">Log In</a>
+                  </li>
+              {% endif %}
+              <!-- should be before logout -->
+              <li>
+                <a href="{{ url_for('dashboard') }}" class="text-gray-600 hover:text-black">Dashboard</a>
+            </li>
+              <li>
+                <a href="{{ url_for('bookings_page') }}" class="text-gray-600 hover:text-black">My Bookings</a>
+            </li>
+              <li>
+                <a href="{{ url_for('scooters') }}" class="button text-black px-4 py-2 rounded hover:text-white hover:border-2 hover:border-black">Book Now</a>
+            </li>
+          </ul>
+      </div>
+  </nav>
+  
+
+    <!-- Flash Messages -->
+    <section class="container mx-auto py-6">
+      {% for message in get_flashed_messages() %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative flash">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </section>
+
+    <!-- Page Content -->
+    <main class="container mx-auto py-6">
+      
+
+      {% block content %}
+      {% endblock %}
+    </main>
+</body>
+</html>

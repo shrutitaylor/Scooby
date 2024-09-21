@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="mr-16 ml-16 bg-white p-8 rounded-lg shadow-lg ">
+    <h1 class="text-3xl font-bold mb-6">Available Scooters</h1>
+      <!-- Search Box -->
+      <div class="mb-4">
+        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for scooter..." 
+               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <table id="scootersTable" class="min-w-full bg-white border border-gray-300">
+      <thead>
+        <tr class="table-color">
+          <th class="py-2 px-4 border">Scooter ID</th>
+          <th class="py-2 px-4 border">Make</th>
+          <th class="py-2 px-4 border">Colour</th>
+          <th class="py-2 px-4 border">Location</th>
+          <th class="py-2 px-4 border">Remaining Power</th>
+          <th class="py-2 px-4 border">Cost Per Hour</th>
+          <th class="py-2 px-4 border">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for scooter in scooters %}
+        <tr>
+          <td class="py-2 px-4 border">{{ scooter.id }}</td>
+          <td class="py-2 px-4 border">{{ scooter.make }}</td>
+          <td class="py-2 px-4 border">{{ scooter.colour }}</td>
+          <td class="py-2 px-4 border">{{ scooter.location }}</td>
+          <td class="py-2 px-4 border">{{ scooter.remaining_power }}</td>
+          <td class="py-2 px-4 border">{{ scooter.cost }}</td>
+          <td class="py-2 px-4 border">
+            <form method="post" action="{{ url_for('book_scooter', scooter_id=scooter.id) }}">
+                <input type="submit" value="Book Scooter" class="button text-black px-4 py-2 rounded">
+            </form>
+            
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Filtering the Table -->
+<script>
+  function filterTable() {
+      var input, filter, table, tr, td, i, j, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("scootersTable");
+      tr = table.getElementsByTagName("tr");
+
+      for (i = 1; i < tr.length; i++) {
+          tr[i].style.display = "none"; // Hide all rows initially
+          td = tr[i].getElementsByTagName("td");
+
+          for (j = 0; j < td.length; j++) {
+              if (td[j]) {
+                  txtValue = td[j].textContent || td[j].innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                      break; // Show the row if any column matches the search value
+                  }
+              }
+          }
+      }
+  }
+</script>
+{% endblock %}
