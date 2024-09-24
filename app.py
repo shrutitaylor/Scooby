@@ -20,6 +20,7 @@ bookings = [
 ]
 
 currentUser = {"TopUp" : "23"}
+myScooter = {'id': 2, 'make': 'Lincoln', 'colour': 'White', 'location': 'Sydney', 'remaining_power': '60%', 'cost': '$13/hour', 'isLocked':'TRUE'}
 
 #Landing page
 @app.route('/')
@@ -63,10 +64,11 @@ def book_scooter(scooter_id):
 def bookings_page():
     return render_template('pages/bookings.html', bookings=bookings)
 
-#My Bookings page
+#My Dashboard page
 @app.route('/dashboard')
 def dashboard():
-    return render_template('pages/dashboard.html', currentUser=currentUser)
+    return render_template('pages/dashboard.html', currentUser=currentUser, scooter = myScooter)
+
 #dummy
 @app.route('/hello/<name>')
 def hello_name(name):
